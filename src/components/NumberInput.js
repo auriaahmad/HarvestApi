@@ -19,8 +19,8 @@ function NumberInput({label, placeholder, onChange, isDisabled}) {
 
   return (
     <div>
-      <label className="block font-bold text-gray-600">{label}:</label>
-      <input className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+      <label className="block text-[20px] font-semibold  text-white mt-[10px]">{label}</label>
+      <input className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-transparent text-white text-lg placeholder:italic placeholder:text-slate-400 block bg-white"
         placeholder={placeholder}
         type="number"
         onChange={
