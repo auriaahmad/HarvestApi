@@ -6,9 +6,9 @@ import Button from "./Button";
 import NumberInput from "./NumberInput";
 import DateRangePicker from "./DateRangePicker";
 import shapes from "../assets/shapes.svg";
+import axios from "axios";
 function MainForm() {
   const [client, setClient] = useState('');
-  // const newClient = client[1];
   const [project, setProject] = useState('');
   const [task, setTask] = useState('');
   const [minimumHours, setMinimumHours] = useState();
@@ -19,12 +19,22 @@ function MainForm() {
   const [endDate, setEndDate] = useState(
     new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
   );
-  const formatedStartDate = startDate.toLocaleDateString();
-  const formatedEndDate = endDate.toLocaleDateString();
+  const formatedStartDate = startDate.toISOString();
+  const formatedEndDate = endDate.toISOString();
+  console.log("i am hreeeee" + formatedEndDate)
   const handleClientSelect = (value) => {
-    const newClient = value.split(",");
-    setClient(newClient);
+    setClient(value);
   };
+  const data = {
+    client,
+    project,
+    task,
+    maximumHours,
+    minimumHours,
+    formatedStartDate,
+    formatedEndDate
+  }
+  console.log(data);
 
   const handleProjectSelect = (value) => {
     setProject(value);
@@ -45,8 +55,17 @@ function MainForm() {
     console.log(formatedStartDate);
     console.log(formatedEndDate);
   };
-  const handleSubmit = () => {
-    // Implement the submission logic here.
+  const handleSubmit1122 = () => {
+      // console.log('Form data submitted:' + data);
+      axios
+          .post('http://localhost:5000/api/selected', data)
+          .then((response) => {
+              alert(response.data.message)                
+          })
+          .catch((error) => {
+              console.error(error);
+              alert(error)                
+          });
   };
 
   return (
@@ -156,8 +175,8 @@ function MainForm() {
                 endDate={endDate}
                 onDatesChange={handleDateChange}
               />
-              <Button
-                onClick={handleSubmit}
+            </form>
+            <button className=" text-white w-full h-[50px] py-2 rounded-lg hover:from-purple-500 hover:to-cyan-500 transition duration-300 mt-5 font-semibold text-[20px]  bg-gradient-to-r from-cyan-500 to-purple-500" onClick={handleSubmit1122}
                 isDisabled={
                   !client ||
                   !project ||
@@ -165,11 +184,7 @@ function MainForm() {
                   !minimumHours ||
                   !maximumHours ||
                   minimumHours > maximumHours
-                }
-              >
-                Submit
-              </Button>
-            </form>
+                }>Submit</button>
           </div>
         </div>
       </div>

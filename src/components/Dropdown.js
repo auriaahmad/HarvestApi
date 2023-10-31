@@ -52,7 +52,7 @@ function Dropdown({
             {placeholder}
           </option>
           {options.map((option) => (
-            <option className="text-black" key={option.id} value={ option.name}>
+            <option className="text-black" key={option.id} value={option.name}>
               {option.name}
             </option>
           ))}
