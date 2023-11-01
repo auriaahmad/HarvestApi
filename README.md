@@ -40,6 +40,4 @@ Follow these steps to get the project up and running:
 ```bash
 git clone https://github.com/auriaahmad/HarvestApi.git
 cd <project directory>
-
-```bash
- npm install
+npm install
