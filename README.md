@@ -39,4 +39,7 @@ Follow these steps to get the project up and running:
 
 ```bash
 git clone https://github.com/auriaahmad/HarvestApi.git
-go to your repository and write command 
+cd <project directory>
+
+```bash
+ npm install
