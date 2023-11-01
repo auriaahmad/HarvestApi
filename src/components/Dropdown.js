@@ -1,63 +1,41 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 function Dropdown({
   label,
   placeholder,
-  apiEndpoint,
-  data,
+  options,
   onSelect,
   isDisabled,
-  parameter,
+  name,
+  id,
+  required,
 }) {
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      const HARVEST_ACCOUNT_ID = 1633271;
-      const ACCESS_TOKEN =
-        "Bearer 2829824.pt.lSsEC5D6idLsGayxYq4XIZGPVjRDyIZQBUa0Bu3ZntApaK4Y-ghJj7WN60ZGpnqii1FmwQlm35CgVDAlClp1SA";
-
-      try {
-        const response = await axios.get(apiEndpoint, {
-          headers: {
-            Authorization: ACCESS_TOKEN,
-            "Harvest-Account-ID": HARVEST_ACCOUNT_ID,
-          },
-        });
-
-        const clientData = response.data[data];
-        setOptions(clientData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <div>
-      <label className="block text-[20px] font-semibold  text-white mt-[10px]">
+      <label className='block text-[14px] mb-2 font-semibold  text-white mt-[10px]'>
         {label}
-        <select
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-lg font-normal bg-transparent"
-          onChange={(e) => {
-            setSelectedOption(e.target.value);
-            onSelect(e.target.value);
-          }}
-          disabled={isDisabled}
-        >
-          <option className="bg-transparent" value="" disabled selected>
-            {placeholder}
-          </option>
-          {options.map((option) => (
-            <option className="text-black" key={option.id} value={option.name}>
-              {option.name}
-            </option>
-          ))}
-        </select>
       </label>
+      <select
+        className='w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-lg font-normal bg-transparent'
+        onChange={onSelect}
+        disabled={isDisabled}
+        name={name}
+        id={id}
+        required={required}
+      >
+        <option className='bg-transparent' value='' disabled selected>
+          {placeholder}
+        </option>
+        {options.map(option => (
+          <option
+            className='text-black'
+            key={option.id}
+            value={name === "task" ? option.task.id : option.id}
+          >
+            {name === "task" ? option.task.name : option.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

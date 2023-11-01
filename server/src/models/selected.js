@@ -1,44 +1,53 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     client: {
-        type: String,
-        required: true,
+      type: Object,
+      required: true,
     },
     project: {
-        type: String,
-        required: true,
-        unique: true,
+      type: Object,
+      required: true,
     },
     task: {
-        type: String,
-        required: true,
+      type: Object,
+      required: true,
+    },
+    task_assignment: {
+      type: Object,
+    },
+    user_assignment: {
+      type: Object,
+    },
+    user: {
+      type: Object,
+    },
+    entryId: {
+      type: String,
     },
     minimumHours: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     maximumHours: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
-    formatedStartDate: {
-        type: Date,
-        required: true,
+    startDate: {
+      type: Date,
+      required: true,
     },
-    formatedEndDate: {
-        type: Date,
-        required: true,
-    }
-}
-    ,
-    {
-        timestamps: true
-    }
+    endDate: {
+      type: Date,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const Selected = mongoose.model('Selected', userSchema);
+const Selected = mongoose.model("Selected", userSchema);
 
-module.exports = Selected
-
-;
+module.exports = Selected;

@@ -1,28 +1,26 @@
-// src/app.js
-const mongoose = require("mongoose");
-const { MongoClient } = require('mongodb');
 const express = require("express");
-var cors = require("cors");
 const app = express();
+const mongoose = require("mongoose");
+var cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+
 app.use(cors());
 const bodyParser = require("body-parser");
-const selectedRoute = require("./routes/selected");
-
 app.use(bodyParser.json());
+
 // Connect to your MongoDB database
-mongoose.connect('mongodb://localhost/selectedDB', {
+mongoose.connect(process.env.DB_URi, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
 // Handle MongoDB connection events and errors
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
 });
 
-// Use the signup route
-app.use("/api", selectedRoute); // This means the signup route will be accessed as /api/signup
+app.use("/api", require("./routes/selected"));
 
 module.exports = app;
