@@ -1,4 +1,4 @@
-# Project Name
+# Harvest API Data Retrieval for Further Use
 
 This project is designed to retrieve data from the Harvest API, including information about clients, projects, and project tasks. It presents this data in a user-friendly web interface, allowing users to select clients, projects, and tasks from dropdown menus. The interface also features a date picker for selecting start and end dates, along with input fields for specifying minimum and maximum hours. A "Submit" button is provided to initiate data submission. It is important to note that the "Submit" button remains disabled until all required fields are filled out.
 
